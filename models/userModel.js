@@ -2,7 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = mongoose.Schema({
-    name: { type: String },
+    email: { type: String }, // , required: true, unique: true
+    password: { type: String }, // 
+    firstname: { type: String }, // , required: true, required: true 
+    lastname: { type: String }, // , required: true
     height: { type: Number },
     weight: { type: Number },
     bodyFat: { type: Number },
