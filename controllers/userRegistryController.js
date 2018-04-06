@@ -1,21 +1,21 @@
-var userController = function(User) {
+var userRegistryController = function(UserRegistry) {
     var post = function(req, res) {
-        var user = new User(req.body);
+        var userRegistry = new UserRegistry(req.body);
 
         if (!req.body.email) {
             res.status(400);
             res.send('Email is required');
         } else {
-            user.save();
+            userRegistry.save();
             res.status(201)
-            res.send(user);
+            res.send(userRegistry);
         }
     };
 
     var get = function(req, res) {
-        var query = getQuery(req, ['name', 'height', 'weight', 'bodyFat']);
+        var query = getQuery(req, ['userModelId', 'email', 'password']);
         
-        User.find(query, function(err, users) {
+        UserRegistry.find(query, function(err, users) {
             if (err) {
                 res.status(500).send(err);
             } else {
@@ -40,4 +40,4 @@ function getQuery(req, properties) {
     return query;
 }
 
-module.exports = userController;
+module.exports = userRegistryController;

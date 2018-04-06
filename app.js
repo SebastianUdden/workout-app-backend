@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var port = process.env.PORT || 3005;
 var db = require('./db/dbConnection');
 var User = require('./models/userModel');
+var UserRegistry = require('./models/userRegistryModel');
 
 app.use(bodyParser.urlencoded({ extended:true }));
 app.use(bodyParser.json());
@@ -29,8 +30,10 @@ User.find(function (err, users) {
     console.log('+++++++++++++++++++++++++++++++++++++++++++++++++++++')
 });
 var userRouter = require('./routes/userRoutes')(User);
+var userRegistryRouter = require('./routes/userRegistryRoutes')(UserRegistry);
 
 app.use('/api/users', userRouter);
+app.use('/api/registry/users', userRegistryRouter);
 
 app.get('/', function(req, res) {
     res.send('Welcome to workout-app-backend, a RESTful API service for the workout app');
